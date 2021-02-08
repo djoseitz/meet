@@ -1,4 +1,8 @@
-** USER STORIES **
+# OBJECTIVE
+
+To build a serverless, progressive web application (PWA) with React using a test-driven development (TDD) technique. The application uses the Google Calendar API to fetch upcoming events.
+
+## USER STORIES
 
 1. As a **user**, I should be able to **show or hide the details of an event** so that **I can choose which events to view more closely**.
 
