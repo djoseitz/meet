@@ -56,12 +56,12 @@
       getURLElement.onclick = function () {
         fetch(getAuthURL)
           .then(function (response) {
-            return reponse.json();
+            return response.json();
           })
           .then(function (json) {
             const result = JSON.stringify(json);
             // we get the value of authUrl
-            const { authUrl } = JSON.parsel(result);
+            const { authUrl } = JSON.parse(result);
             // then add it to the html
             resultElement.innerText = result;
             resultLink.href = authUrl;
