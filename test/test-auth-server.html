@@ -73,7 +73,7 @@
       const getAccessToken = document.getElementById('getToken');
       const accessTokenElement = document.getElementById('accessToken');
       const getToken =
-        'https://30bf329ybh.execute-api.us-west-1.amazonaws.com/dev/api/token/';
+        'https://v42fuly3x5.execute-api.us-west-1.amazonaws.com/dev/api/token/';
 
       getAccessToken.onclick = function () {
         const code = codeValue.value.replace('/', '%2F');
@@ -90,7 +90,7 @@
       const getEvents = document.getElementById('getEvents');
       const events = document.getElementById('events');
       const getCalendarEvents =
-        'https://30bf329ybh.execute-api.us-west-1.amazonaws.com/dev/api/get-events/';
+        'https://v42fuly3x5.execute-api.us-west-1.amazonaws.com/dev/api/get-events/';
 
       getEvents.onclick = function () {
         const { access_token } = JSON.parse(accessTokenElement.innerText);
