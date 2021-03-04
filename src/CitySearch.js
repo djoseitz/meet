@@ -11,6 +11,17 @@ class CitySearch extends Component {
     this.setState({ query: value });
   };
 
+  handleItemClicked = (suggestion) => {
+    this.setState({
+      query: suggestion,
+      suggestions: [],
+      showSuggestions: false,
+      infoText: '',
+      warningText: '',
+    });
+    this.props.updateEvents(suggestion);
+  };
+
 
   render() {
     return (
