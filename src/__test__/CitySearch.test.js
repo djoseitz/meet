@@ -53,10 +53,21 @@ describe('<CitySearch /> component', () => {
     const CitySearchWrapper = shallow(<CitySearch />);
     CitySearchWrapper.setState({
       query: 'Berlin',
-      showSuggestions: undefined
+      showSuggestions: false
     });
     CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
     expect(CitySearchWrapper.state('showSuggestions')).toBe(false);
     expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({ display: 'none' });
+  });
+
+  test("suggestions list will appear upon having a focus on city input field", () => {
+    const CitySearchWrapper = shallow(<CitySearch />);
+    const locations = extractLocations(mockData);
+    CitySearchWrapper.setState({
+      query: '',
+      suggestions: locations,
+    });
+    CitySearchWrapper.find('.city').simulate('focus');
+    expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({});
   });
 });
