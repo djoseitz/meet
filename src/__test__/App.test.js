@@ -42,18 +42,16 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   });
 
-  test('get list of events matching the city selected by the user', async () => {
-    const AppWrapper = mount(<App />);
+  test('get list of events after the user selects a city', async () => {
+    const AppWrapper = mount(<App className='appWrapper' />);
+    AppWrapper.instance().updateEvents = jest.fn();
+    AppWrapper.instance().forceUpdate();
     const CitySearchWrapper = AppWrapper.find(CitySearch);
-    const locations = extractLocations(mockData);
-    CitySearchWrapper.setState({ suggestions: locations });
-    const suggestions = CitySearchWrapper.state('suggestions');
-    const selectedIndex = Math.floor(Math.random() * (suggestions.length));
-    const selectedCity = suggestions[selectedIndex];
-    await CitySearchWrapper.instance().handleItemClicked(selectedCity);
-    const allEvents = await getEvents();
-    const eventsToShow = allEvents.filter(event => event.location === selectedCity);
-    expect(AppWrapper.state('events')).toEqual(eventsToShow);
+    CitySearchWrapper.instance().handleItemClicked('Berlin, Germany');
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledTimes(1);
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledWith(
+      'Berlin, Germany'
+    );
     AppWrapper.unmount();
   });
   

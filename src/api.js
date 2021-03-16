@@ -129,7 +129,7 @@ export const getEvents = async () => {
   const token = await getAccessToken();
   if (token) {
     removeQuery();
-    const url = `https://v42fuly3x5.execute-api.us-west-1.amazonaws.com/dev/api/get-events/${token}`;
+    const url = `https://30bf329ybh.execute-api.us-west-1.amazonaws.com/dev/api/get-events/${token}`;
     const result = await axios.get(url);
     if (result.data) {
       var locations = extractLocations(result.data.events);
