@@ -6,6 +6,7 @@ import NumberOfEvents from './NumberOfEvents';
 import EventGenre from './EventGenre';
 import { getEvents } from './api';
 import './nprogress.css';
+import { WarningAlert } from './Alert';
 import {
   ScatterChart,
   Scatter,
@@ -21,6 +22,7 @@ class App extends Component {
     events: [],
     currentLocation: 'all',
     locations: [],
+    warningText: '',
     numberOfEvents: 32,
   };
 
