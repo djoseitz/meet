@@ -121,6 +121,7 @@ class App extends Component {
           updateEvents={this.updateEvents}
           numberOfEvents={this.state.numberOfEvents}
         />
+        <WarningAlert text={warningText} />
         {/* <div className="data-vis-wrapper">
           <ResponsiveContainer height={400}>
             <EventGenre events={this.state.events} />
