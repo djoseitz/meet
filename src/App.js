@@ -112,7 +112,7 @@ class App extends Component {
 
   render() {
     const data = this.getData().sort((a, b) => (a.city > b.city ? 1 : -1));
-    const {warningText = this.state};
+    const {warningText} = this.state;
 
     return (
       <div className="App">
