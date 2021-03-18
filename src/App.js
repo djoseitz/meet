@@ -69,6 +69,14 @@ class App extends Component {
   };
 
   componentDidMount() {
+    if (!navigator.onLine) {
+      this.setState({
+        warningText:
+          'You are currently using the app offline and viewing data from your last visit. Data will not be up-to-date.',
+      });
+    } else {
+      this.setState({ warningText: '' });
+    }
     this.mounted = true;
     getEvents().then((response) => {
       if (this.mounted) {
@@ -79,6 +87,22 @@ class App extends Component {
       }
     });
   }
+
+  // async componentDidMount() {
+  //   this.mounted = true;
+  //   if (!navigator.onLine) {
+  //     this.setState({
+  //       warningText:
+  //         'You are currently using the app offline and viewing data from your last visit. Data will not be up-to-date.',
+  //     });
+  //   } else {
+  //     this.setState({ warningText: '' });
+  //   }
+
+  //   if (this.mounted) {
+  //     this.updateEvents();
+  //   }
+  // }
 
   componentWillUnmount() {
     this.mounted = false;
