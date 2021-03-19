@@ -83,6 +83,8 @@ class App extends Component {
     }
   };
 
+  
+
   // Renders loading spinner while live data is being rendered
   renderData = () => {
     const { events, locations, isLoading } = this.state;

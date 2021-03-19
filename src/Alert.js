@@ -34,13 +34,6 @@ class WarningAlert extends Alert {
     super(props);
     this.color = '#B73DBA';
   }
-
-  getStyle = () => {
-    return {
-      color: this.color,
-      fontStyle: 'bold',
-    };
-  }
 }
 
 class ErrorAlert extends Alert {
