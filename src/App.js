@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
-import DataVisualization from './DataVisualization';
+// import DataVisualization from './DataVisualization';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import { WarningAlert } from './Alert';
 import { getEvents } from './api';
-import './styles/App.scss';
+import './styles/App.css';
 import './styles/nprogress.css';
 
 class App extends Component {
@@ -91,7 +91,7 @@ class App extends Component {
       <LoadingSpinner />
     ) : (
       <div>
-        <DataVisualization events={events} locations={locations} />
+        {/* <DataVisualization events={events} locations={locations} /> */}
         <EventList events={events} />
       </div>
     );

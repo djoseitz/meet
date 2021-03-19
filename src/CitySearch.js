@@ -1,42 +1,14 @@
 import React, { Component } from 'react';
-import { InfoAlert, WarningAlert } from './Alert';
+import { InfoAlert } from './Alert';
+import PropTypes from 'prop-types';
 
 class CitySearch extends Component {
   state = {
-    locations: this.props.locations,
     query: '',
     suggestions: [],
     showSuggestions: false,
-  };
-
-  handleInputChanged = (e) => {
-    this.setState({ showSuggestions: true });
-    const value = e.target.value;
-    const suggestions = this.props.locations.filter((location) => {
-      return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
-    });
-    if (suggestions.length === 0) {
-      this.setState({
-        query: value,
-        warningText: '',
-        infoText:
-          'We can not find the city you are looking for. Please try another city',
-      });
-      // if (value.includes('fuck') || value.includes('shit')) {
-      //   this.setState({
-      //     query: value,
-      //     warningText: 'What??!! 🤬🤬🤬',
-      //     infoText: '',
-      //   });
-      // }
-    } else {
-      return this.setState({
-        query: value,
-        suggestions,
-        infoText: '',
-        warningText: '',
-      });
-    }
+    locations: this.props.locations,
+    infoText: '',
   };
 
   handleItemClicked = (suggestion) => {
@@ -44,50 +16,74 @@ class CitySearch extends Component {
       query: suggestion,
       suggestions: [],
       showSuggestions: false,
-      infoText: '',
-      warningText: '',
     });
     this.props.updateEvents(suggestion);
   };
 
+  // Displays suggestions based on user input (autocomplete feature)
+  handleChange = (event) => {
+    const value = event.target.value;
+    this.setState({ showSuggestions: true });
+
+    const suggestions = this.props.locations.filter((location) => {
+      return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
+    });
+    if (suggestions.length === 0) {
+      this.setState({
+        query: value,
+        infoText: `Sorry, we could not find "${value}". Please try another city`,
+        showSuggestions: false,
+      });
+    } else {
+      this.setState({
+        infoText: '',
+        query: value,
+        suggestions,
+      });
+    }
+  };
+
   render() {
+    const { query, suggestions, showSuggestions, infoText } = this.state;
+
     return (
-      <div className="CitySearch">
-        <InfoAlert className="info" text={this.state.infoText} />
-        <WarningAlert className="warning" text={this.state.warningText} />
-        <label>Name of city: </label>
-        <div>
-          <input
-            label="City name"
-            type="text"
-            className="citySearchInput"
-            value={this.state.query}
-            onChange={this.handleInputChanged}
-          />
-          <ul
-            className={
-              this.state.showSuggestions
-                ? 'suggestions showSuggestions'
-                : 'display-none'
-            }
-          >
-            {this.state.suggestions.map((suggestion) => (
-              <li
-                className="suggestionCity"
-                key={suggestion}
-                onClick={() => this.handleItemClicked(suggestion)}
-              >
-                {suggestion}
-              </li>
-            ))}
-            <li onClick={() => this.handleItemClicked('all')}>
-              <b>See all cities</b>
+      <div className='CitySearch'>
+        <label>Choose your nearest city</label>
+        <input
+          type='text'
+          className='city'
+          value={query}
+          onChange={this.handleChange}
+          onFocus={() => {
+            this.setState({ showSuggestions: true });
+          }}
+        />
+        <ul
+          className='suggestions'
+          style={showSuggestions ? {} : { display: 'none' }}
+        >
+          {suggestions.map((suggestion) => (
+            <li
+              id={suggestion}
+              key={suggestion}
+              onClick={() => this.handleItemClicked(suggestion)}
+            >
+              {suggestion}
             </li>
-          </ul>
-        </div>
+          ))}
+          <li key='all' onClick={() => this.handleItemClicked('all')}>
+            <b>See all cities</b>
+          </li>
+        </ul>
+        <InfoAlert text={infoText} />
       </div>
     );
   }
 }
+
+CitySearch.propTypes = {
+  locations: PropTypes.array.isRequired,
+  updateEvents: PropTypes.func.isRequired,
+};
 
 export default CitySearch;
