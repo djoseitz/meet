@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/App.css';
 
 class Alert extends Component {
   constructor(props) {
@@ -32,6 +33,13 @@ class WarningAlert extends Alert {
   constructor(props) {
     super(props);
     this.color = '#B73DBA';
+  }
+
+  getStyle = () => {
+    return {
+      color: this.color,
+      fontStyle: 'bold',
+    };
   }
 }
 
